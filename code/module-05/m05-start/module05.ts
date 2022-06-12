@@ -5,12 +5,64 @@
 
 class BuildArray {
     // TODO Define the properties
-
+    private _items: number;
+    private _sortOrder: 'ascending' | 'descending';
     // TODO Define the constructor
-
+    constructor(items:number, sortOrder: 'ascending' | 'descending') {
+      this._items = items;
+      this._sortOrder = sortOrder;
+    }
     // TODO Define the accessors
+    get items():number {
+      return this._items;
+    }
 
+    set items(items:number) {
+      this._items = items;
+    }
+
+    get sortOrder(): 'ascending' | 'descending' {
+      return this._sortOrder;
+    }
+
+    set sortOrder(sortOrder: 'ascending' | 'descending') {
+      this._sortOrder = sortOrder;
+    }
     // TODO Define the methods
+    private sortDescending = (a: number, b: number) => {
+      if (a > b) {
+          return -1;
+      } else if (b > a) {
+          return 1;
+      } else {
+          return 0;}
+    }
+    private sortAscending = (a: number, b: number) => {
+      if (a > b) {
+          return 1;
+      } else if (b > a) {
+          return -1;
+      } else {
+          return 0; }
+    }
+    // TODO Define the methods.
+buildArray(): number[] {
+  let randomNumbers: number[] = [];
+  let nextNumber: number;
+  for (let counter = 0; counter < this.items; counter++) {
+      nextNumber = Math.ceil(Math.random() * (100 - 1));
+      if (randomNumbers.indexOf(nextNumber) === -1) {
+          randomNumbers.push(nextNumber);
+      } else {
+          counter--;
+      }
+  }
+  if (this._sortOrder === 'ascending') {
+      return randomNumbers.sort(this.sortAscending);
+  } else {
+      return randomNumbers.sort(this.sortDescending);
+  } 
+}
 
 }
 
@@ -60,7 +112,7 @@ function buildArray(items: number, sortOrder: 'ascending' | 'descending'): numbe
 
 /*  TODO: Instantiate the BuildArray objects. */
 
-let testArray1 = buildArray(12, 'ascending');
-let testArray2 = buildArray(8, 'descending');
-console.log(testArray1);
-console.log(testArray2);
+let testArray1 = new BuildArray(12, 'ascending');
+let testArray2 = new BuildArray(8, 'descending');
+console.log(testArray1.buildArray());
+console.log(testArray2.buildArray());
