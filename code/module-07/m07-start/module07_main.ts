@@ -2,6 +2,7 @@
     Lab Start */
 
 /*  TODO Add the import statement. */
+import {calculateInterestOnlyLoanPayment, calculateConventionalLoanPayment} from './module07_loan-programs';
 
 /*  TODO Update the function calls. */
 let interestOnlyPayment = calculateInterestOnlyLoanPayment({principle: 30000, interestRate: 5});
